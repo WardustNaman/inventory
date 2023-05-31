@@ -1,0 +1,7 @@
+<p>
+<%= link_to "edit", edit_transaction_path(@transaction.id) %> | 
+<%= link_to "delete", transaction_path(@transaction.id),method: :delete, data: {confirm: "Are you sure?"} %><% end %>
+</p>
+<p> Product : <%= @transaction.product_id %></p>
+<p> Transaction Type : <%= @transaction.transaction_type %></p>
+<p> Quantity :<%= @transaction.quantity %></p>

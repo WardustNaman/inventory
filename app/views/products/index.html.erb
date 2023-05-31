@@ -1,0 +1,33 @@
+<h1>Welcome to the Inventory</h1>
+<p>Please enter the following details to add a product</p>
+
+<%= form_for @product do |f| %>
+<% if @product.errors.any? %>
+<h3>These errors prohibited the form from being saved:</h3>
+<ul>
+	<% @product.errors.full_messages.each do |msg| %>
+	<li><%= msg %></li>
+	<% end %>
+
+<% end %>
+</ul>
+<label for="product_name"> Name : </label> <br/>
+<%= f.text_field :name %> </span><br/>
+<label for="product_description"> Description : </label> <br/>
+<%= f.text_field :description %><br/>
+<label for="product_quantity"> Quantity : </label> <br/>
+<%= f.number_field :quantity, default:1%><br/>
+<%= f.submit "SUBMIT"%>
+<% end %>
+
+<br>
+<b>Here's your List of Products! </b>
+<% @products.each do |product| %>
+<ol>
+    <p> Name : <%= product.name %></p>
+    <p> Description : <%= product.description %></p>
+    <p> Quantity :<%= product.quantity %></p>
+    <%= link_to "delete", product_path(product.id),method: :delete, data: {confirm: "Are you sure?"} %>
+</ol>
+<%end%>
+<br>

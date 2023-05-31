@@ -1,0 +1,22 @@
+<%= form_for @transaction do |f| %>
+<% if @transaction.errors.any? %>
+<h3>These errors prohibited the form from being saved:</h3>
+<ul>
+	<% @transaction.errors.full_messages.each do |msg| %>
+	<li><%= msg %></li>
+	<% end %>
+
+<% end %>
+</ul>
+<label for="transaction_product_id"> Product : </label><br/>
+<%= f.collection_select :product_id, Product.all, :id, :name, prompt: "Select Product" %> <br/>
+
+<label for= "transaction_type"> Transaction Type : </label><br/>
+<%= f.radio_button :transaction_type, Incoming Transaction %> Incoming Transaction
+<%= f.radio_button :transaction_type, Outgoing Transaction %> Outgoing Transaction
+
+<label for= "transaction_quantity"> Quantity : </label><br/>
+<%= f.number_field :quantity%> <br/>
+
+<%= f.submit %>
+<% end %>

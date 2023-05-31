@@ -31,3 +31,14 @@
 
 en:
   hello: "Hello world"
+
+  activerecord:
+    attributes:
+      product:
+        quantity: "Product "
+    errors:
+      models:
+        product:
+          attributes:
+            quantity:
+              blank: "should have atleast 1 quantity"

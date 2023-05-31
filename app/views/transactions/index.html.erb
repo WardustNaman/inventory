@@ -1,0 +1,37 @@
+<h1>Transactions</h1>
+<p>Create a new transaction</p>
+
+<%= form_for @transaction do |f| %>
+<% if @transaction.errors.any? %>
+<h3>These errors prohibited the form from being saved:</h3>
+<ul>
+	<% @transaction.errors.full_messages.each do |msg| %>
+	<li><%= msg %></li>
+	<% end %>
+
+<% end %>
+</ul>
+<label for="transaction_product_id"> Product : </label><br/>
+<%= f.collection_select :product_id, Product.all, :id, :name, prompt: "Select Product" %> <br/>
+
+<label for= "transaction_type"> Transaction Type : </label><br/>
+<%= f.radio_button :transaction_type, "Incoming Transaction" %> Incoming Transaction
+<%= f.radio_button :transaction_type, "Outgoing Transaction" %> Outgoing Transaction
+
+<label for= "transaction_quantity"> Quantity : </label><br/>
+<%= f.number_field :quantity%> <br/>
+
+<%= f.submit %>
+<% end %>
+
+<br>
+<b>Here's your Transactions history! </b>
+<% @transactions.each do |transaction| %>
+<ol>
+    <p> Product : <%= transaction.product_id %></p>
+    <p> Transaction Type : <%= transaction.transaction_type %></p>
+    <p> Quantity :<%= transaction.quantity %></p>
+    <%= link_to "delete", transaction_path(transaction.id),method: :delete, data: {confirm: "Are you sure?"} %>
+</ol>
+<%end%>
+<br>
